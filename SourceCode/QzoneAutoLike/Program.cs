@@ -10,6 +10,7 @@ namespace QzoneAutoLike
 {
     static class Program
     {
+        public const string localVersion = "1.0.0.0000";
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

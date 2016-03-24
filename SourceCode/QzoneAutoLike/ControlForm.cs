@@ -15,8 +15,10 @@ namespace QzoneAutoLike
         {
             InitializeComponent();
         }
+        public string remoteVersion = "1.0.0.0000";
         private void Form1_Load(object sender, EventArgs e)
         {
+            label6_Click(null, null);
             _we = new WebBrowserForm();
             _we.Show();
             timer_AutoLike.Enabled = true;
@@ -141,7 +143,29 @@ namespace QzoneAutoLike
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.khmapp.xyz/"); 
+            System.Diagnostics.Process.Start("http://www.khmapp.xyz/");
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            remoteVersion = GetHtmlCode.GetWebClient(@"https://raw.githubusercontent.com/a645162/QzoneAutoLike_CSharp/master/version.inf");
+            string lV, rV;
+            lV = deleteAllDotString(Program.localVersion);
+            rV = deleteAllDotString(remoteVersion);
+
+            string aboutText = "已经是最新版本";
+            label6.Text = "当前版本:" + Program.localVersion + "\n远程版本:" + remoteVersion + "\n" + aboutText;
+
+        }
+
+        private string deleteAllDotString(string source)
+        {
+            string ret = source;
+            while (ret.IndexOf(".") != -1)
+            {
+                ret = ret.Replace(".", "");
+            }
+            return ret;
         }
     }
 }

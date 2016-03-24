@@ -319,18 +319,20 @@
             // 
             // label6
             // 
+            this.label6.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.label6.Location = new System.Drawing.Point(17, 498);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(202, 31);
+            this.label6.Size = new System.Drawing.Size(202, 56);
             this.label6.TabIndex = 27;
-            this.label6.Text = "当前版本1.0.0.0000(相同)\r\n服务器版本:1.0.0.0000";
+            this.label6.Text = "当前版本:\r\n服务器版本:\r\n已经是最新版本";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(231, 538);
+            this.ClientSize = new System.Drawing.Size(231, 560);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.button7);
