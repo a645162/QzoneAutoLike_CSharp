@@ -10,7 +10,9 @@ namespace QzoneAutoLike
 {
     static class Program
     {
-        public const string localVersion = "1.0.0.0000";
+        public const string localVersion = "1.0.0.0001";
+        public const string dotNetVersion = "35";
+        public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

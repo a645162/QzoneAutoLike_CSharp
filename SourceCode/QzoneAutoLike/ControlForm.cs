@@ -10,6 +10,8 @@ namespace QzoneAutoLike
 {
     public partial class ControlForm : Form
     {
+        public static bool haveNewVersion = false;
+        private static int newVersionHeight;
         Form _we;
         public ControlForm()
         {
@@ -18,7 +20,9 @@ namespace QzoneAutoLike
         public string remoteVersion = "1.0.0.0000";
         private void Form1_Load(object sender, EventArgs e)
         {
+            newVersionHeight = this.Height;
             label6_Click(null, null);
+            linkLabel1.Text = "代码仓库(Github)：" + Program.githubUrl;
             _we = new WebBrowserForm();
             _we.Show();
             timer_AutoLike.Enabled = true;
@@ -68,17 +72,19 @@ namespace QzoneAutoLike
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //https://github.com/a645162/qzoneautolike
+            //https://github.com/a645162/QzoneAutoLike_CSharp
             //调用系统默认的浏览器  
-            System.Diagnostics.Process.Start("https://github.com/a645162/qzoneautolike");
+            System.Diagnostics.Process.Start(Program.githubUrl);
         }
         private void button3_Click(object sender, EventArgs e)
         {
             runJQuery(Properties.Resources.autol);
+            MessageBox.Show("写入脚本成功！");
         }
         private void button4_Click(object sender, EventArgs e)
         {
             runJQuery(Properties.Resources.autoc);
+
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -148,14 +154,28 @@ namespace QzoneAutoLike
 
         private void label6_Click(object sender, EventArgs e)
         {
-            remoteVersion = GetHtmlCode.GetWebClient(@"https://raw.githubusercontent.com/a645162/QzoneAutoLike_CSharp/master/version.inf");
-            string lV, rV;
-            lV = deleteAllDotString(Program.localVersion);
-            rV = deleteAllDotString(remoteVersion);
-
-            string aboutText = "已经是最新版本";
+            remoteVersion = GetHtmlCode.GetWebClient(Program.githubUrl + "raw/master/SourceCode/QzoneAutoLike/version.inf");
+            int lV, rV;
+            lV = int.Parse(deleteAllDotString(Program.localVersion));
+            rV = int.Parse(deleteAllDotString(remoteVersion));
+            string aboutText;
+            if (lV < rV)
+            {
+                newHeight(newVersionHeight);
+                aboutText = "发现新版本";
+            }
+            else
+            {
+                newHeight(553);
+                aboutText = "已经是最新版本";
+            }
             label6.Text = "当前版本:" + Program.localVersion + "\n远程版本:" + remoteVersion + "\n" + aboutText;
+        }
 
+        private void newHeight(int height)
+        {
+            if (this.Height != height)
+                this.Height = height;
         }
 
         private string deleteAllDotString(string source)
@@ -166,6 +186,75 @@ namespace QzoneAutoLike
                 ret = ret.Replace(".", "");
             }
             return ret;
+        }
+
+        /// <summary>        
+        /// c#,.net 下载文件        
+        /// </summary>        
+        /// <param name="URL">下载文件地址</param>       
+        /// 
+        /// <param name="Filename">下载后的存放地址</param>        
+        /// <param name="Prog">用于显示的进度条</param>        
+        /// 
+        public void DownloadFile(string URL, string filename, System.Windows.Forms.ProgressBar prog, System.Windows.Forms.Label label1)
+        {
+            float percent = 0;
+            try
+            {
+                System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
+                System.Net.HttpWebResponse myrp = (System.Net.HttpWebResponse)Myrq.GetResponse();
+                long totalBytes = myrp.ContentLength;
+                if (prog != null)
+                {
+                    prog.Maximum = (int)totalBytes;
+                }
+                System.IO.Stream st = myrp.GetResponseStream();
+                System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
+                long totalDownloadedByte = 0;
+                byte[] by = new byte[1024];
+                int osize = st.Read(by, 0, (int)by.Length);
+                while (osize > 0)
+                {
+                    totalDownloadedByte = osize + totalDownloadedByte;
+                    System.Windows.Forms.Application.DoEvents();
+                    so.Write(by, 0, osize);
+                    if (prog != null)
+                    {
+                        prog.Value = (int)totalDownloadedByte;
+                    }
+                    osize = st.Read(by, 0, (int)by.Length);
+
+                    percent = (float)totalDownloadedByte / (float)totalBytes * 100;
+                    label1.Text = "当前补丁下载进度" + percent.ToString() + "%";
+                    System.Windows.Forms.Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
+                }
+                so.Close();
+                st.Close();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DialogResult dR_mb = MessageBox.Show(this, "您是否要使用程序自动升级？\n[是(Y)] 使用自动升级 [否(N)]进入Github手动下载 [取消]取消操作"
+                , "程序更新", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+            switch (dR_mb)
+            {
+                case DialogResult.Yes:
+
+                    break;
+                case DialogResult.No:
+                    linkLabel1_LinkClicked(null, null);
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

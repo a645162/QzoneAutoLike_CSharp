@@ -48,7 +48,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.timer_AutoLoad = new System.Windows.Forms.Timer(this.components);
@@ -57,6 +56,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label6 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,12 +135,12 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(13, 323);
+            this.label3.Location = new System.Drawing.Point(13, 297);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(192, 93);
+            this.label3.Size = new System.Drawing.Size(192, 76);
             this.label3.TabIndex = 9;
-            this.label3.Text = "程序由孔昊旻设计\r\nQQ：846155976\r\nE-mail：a645162@outlook.com\r\n程序原理：让webBrowser执行JQuery脚本\r\n程" +
-    "序开发IDE：Visual Studio 2015\r\n架构：C# .Net";
+            this.label3.Text = "程序由孔昊旻设计\r\nE-mail：a645162@outlook.com\r\n程序原理：让webBrowser执行JQuery脚本\r\n程序开发IDE：Visual " +
+    "Studio 2015\r\n架构：C# .Net";
             // 
             // checkBox4
             // 
@@ -179,12 +179,12 @@
             // 
             // linkLabel1
             // 
-            this.linkLabel1.Location = new System.Drawing.Point(12, 416);
+            this.linkLabel1.Location = new System.Drawing.Point(12, 375);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(209, 43);
             this.linkLabel1.TabIndex = 13;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "代码仓库(Github)：\r\nhttps://github.com/a645162/qzoneautolike";
+            this.linkLabel1.Text = "代码仓库(Github)：\r\nhttps://github.com/a645162/QzoneAutoLike_CSharp";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // button3
@@ -248,15 +248,6 @@
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 298);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 12);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "↑这个功能一般勾选20分钟即可";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -309,7 +300,7 @@
             // 
             // linkLabel2
             // 
-            this.linkLabel2.Location = new System.Drawing.Point(13, 458);
+            this.linkLabel2.Location = new System.Drawing.Point(13, 421);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(209, 31);
             this.linkLabel2.TabIndex = 26;
@@ -320,25 +311,35 @@
             // label6
             // 
             this.label6.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.label6.Location = new System.Drawing.Point(17, 498);
+            this.label6.Location = new System.Drawing.Point(13, 451);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(202, 56);
+            this.label6.Size = new System.Drawing.Size(202, 60);
             this.label6.TabIndex = 27;
             this.label6.Text = "当前版本:\r\n服务器版本:\r\n已经是最新版本";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(13, 518);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(209, 32);
+            this.button8.TabIndex = 28;
+            this.button8.Text = "更新程序";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // ControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(231, 560);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -349,12 +350,12 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ControlForm";
@@ -390,7 +391,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Timer timer_AutoLoad;
@@ -399,6 +399,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button8;
     }
 }
 
