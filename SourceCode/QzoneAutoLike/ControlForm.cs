@@ -62,10 +62,7 @@ namespace QzoneAutoLike
             ele.SetAttribute("text", JQuerySourceCode);
             WebBrowserForm.Wb.Document.Body.AppendChild(ele);
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            timer_AutoLike.Interval = int.Parse(textBox1.Text);
-        }
+
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
         {
             _we.Visible = checkBox4.Checked;
@@ -79,12 +76,12 @@ namespace QzoneAutoLike
         private void button3_Click(object sender, EventArgs e)
         {
             runJQuery(Properties.Resources.autol);
-            MessageBox.Show("写入脚本成功！");
+            MessageBox.Show(this,"成功写入自动点赞脚本！","QQ空间自动赞",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
         private void button4_Click(object sender, EventArgs e)
         {
             runJQuery(Properties.Resources.autoc);
-
+            MessageBox.Show(this, "成功写入自动取消赞脚本！", "QQ空间自动赞", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -102,6 +99,7 @@ namespace QzoneAutoLike
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             textBox1.Text = DeleteTheOtherThanDigitalContent(textBox1.Text);
+            timer_AutoLike.Interval = int.Parse(textBox1.Text);
         }
         public string DeleteTheOtherThanDigitalContent(string text)
         {
@@ -128,23 +126,17 @@ namespace QzoneAutoLike
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             textBox3.Text = DeleteTheOtherThanDigitalContent(textBox3.Text);
+            timer_AutoRefresh.Interval = int.Parse(textBox3.Text);
         }
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             textBox2.Text = DeleteTheOtherThanDigitalContent(textBox2.Text);
+            timer_AutoLoad.Interval = int.Parse(textBox2.Text);
         }
         private void timer_AutoLoad_Tick(object sender, EventArgs e)
         {
             if (checkBox2.Checked)
                 button5_Click(sender, e);
-        }
-        private void button6_Click(object sender, EventArgs e)
-        {
-            timer_AutoRefresh.Interval = int.Parse(textBox3.Text);
-        }
-        private void button7_Click(object sender, EventArgs e)
-        {
-            timer_AutoLoad.Interval = int.Parse(textBox2.Text);
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
