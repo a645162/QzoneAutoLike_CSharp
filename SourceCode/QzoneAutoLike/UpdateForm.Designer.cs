@@ -1,6 +1,6 @@
 ﻿namespace QzoneAutoLike
 {
-    partial class Update
+    partial class UpdateForm
     {
         /// <summary>
         /// Required designer variable.
@@ -144,8 +144,9 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "开始";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Update
+            // UpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -160,8 +161,9 @@
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
-            this.Name = "Update";
+            this.Name = "UpdateForm";
             this.Text = "Update";
+            this.Load += new System.EventHandler(this.UpdateForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

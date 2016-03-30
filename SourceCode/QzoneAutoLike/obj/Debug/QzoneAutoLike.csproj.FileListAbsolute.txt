@@ -21,4 +21,4 @@ C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\D
 C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Debug\QzoneAutoLike.WebBrowserForm.resources
 C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Debug\QzoneAutoLike.Properties.Resources.resources
 C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Debug\QzoneAutoLike.csproj.GenerateResource.Cache
-C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Debug\QzoneAutoLike.Update.resources
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Debug\QzoneAutoLike.UpdateForm.resources

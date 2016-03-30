@@ -10,7 +10,7 @@ namespace QzoneAutoLike
 {
     static class Program
     {
-        public const string localVersion = "1.0.0.0001";
+        public static string localVersion;
         public const string dotNetVersion = "35";
         public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
         /// <summary>
@@ -19,6 +19,7 @@ namespace QzoneAutoLike
         [STAThread]
         static void Main()
         {
+            localVersion = Application.ProductVersion;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ControlForm());

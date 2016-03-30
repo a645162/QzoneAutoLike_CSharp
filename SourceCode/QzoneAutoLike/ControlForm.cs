@@ -21,7 +21,8 @@ namespace QzoneAutoLike
         private void Form1_Load(object sender, EventArgs e)
         {
             newVersionHeight = this.Height;
-            label6_Click(null, null);
+            label6.Text = "当前版本:" + Program.localVersion + "\n\n→点我检查更新←";
+            newHeight(553);
             linkLabel1.Text = "代码仓库(Github)：" + Program.githubUrl;
             _we = new WebBrowserForm();
             _we.Show();
@@ -76,7 +77,7 @@ namespace QzoneAutoLike
         private void button3_Click(object sender, EventArgs e)
         {
             runJQuery(Properties.Resources.autol);
-            MessageBox.Show(this,"成功写入自动点赞脚本！","QQ空间自动赞",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(this, "成功写入自动点赞脚本！", "QQ空间自动赞", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -144,7 +145,7 @@ namespace QzoneAutoLike
             System.Diagnostics.Process.Start("http://www.khmapp.xyz/");
         }
 
-        private void label6_Click(object sender, EventArgs e)
+        private void checkUpdate()
         {
             remoteVersion = GetHtmlCode.GetWebClient(Program.githubUrl + "raw/master/SourceCode/QzoneAutoLike/version.inf");
             int lV, rV;
@@ -159,7 +160,7 @@ namespace QzoneAutoLike
             else
             {
                 newHeight(553);
-                aboutText = "已经是最新版本";
+                aboutText = "服务器没有更高的版本";
             }
             label6.Text = "当前版本:" + Program.localVersion + "\n远程版本:" + remoteVersion + "\n" + aboutText;
         }
@@ -236,7 +237,7 @@ namespace QzoneAutoLike
             switch (dR_mb)
             {
                 case DialogResult.Yes:
-
+                    new UpdateForm().Show();
                     break;
                 case DialogResult.No:
                     linkLabel1_LinkClicked(null, null);
@@ -247,6 +248,16 @@ namespace QzoneAutoLike
                     break;
             }
 
+        }
+        private bool checkedUpdate = false;
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            if (!checkedUpdate)
+            {
+                checkUpdate();
+                checkedUpdate = true;
+            }
         }
     }
 }

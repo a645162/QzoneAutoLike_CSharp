@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace QzoneAutoLike
 {
-    public partial class Update : Form
+    public partial class UpdateForm : Form
     {
-        public Update()
+        public UpdateForm()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateForm_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
