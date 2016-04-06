@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("QQ空间自动点赞器")]
 [assembly: AssemblyDescription("QQ空间自动点赞器 - 主程序")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("孔昊旻")]
+[assembly: AssemblyCompany("Flame")]
 [assembly: AssemblyProduct("QQ空间自动点赞器")]
-[assembly: AssemblyCopyright("孔昊旻出品")]
+[assembly: AssemblyCopyright("Flame")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -34,6 +34,6 @@ using System.Runtime.InteropServices;
 // 方法是按如下所示使用“*”: 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0000")]
-[assembly: AssemblyFileVersion("1.0.0.0003")]
+[assembly: AssemblyFileVersion("1.0.0.0002")]
 [assembly: NeutralResourcesLanguage("zh-Hans")]
 

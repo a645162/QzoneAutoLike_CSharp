@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Security.Policy;
 using System.Windows.Forms;
@@ -11,7 +9,7 @@ namespace QzoneAutoLike
     static class Program
     {
         public static string localVersion;
-        public const string dotNetVersion = "35";
+        public const string dotNetVersion = "45";
         public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
         /// <summary>
         /// 应用程序的主入口点。
@@ -30,11 +28,9 @@ namespace QzoneAutoLike
         public static Url StringToUrl(string url)
         {
             Url temp = null;
-
             string url1;
             url1 = Fix(url);
             //转换前先修复提升成功率
-
             try
             {
                 temp = new Url(url1);
@@ -49,11 +45,9 @@ namespace QzoneAutoLike
         public static Uri StringToUri(string uri)
         {
             Uri temp = null;
-
             string uri1;
             uri1 = Fix(uri);
             //转换前先修复提升成功率
-
             try
             {
                 temp = new Uri(uri1);
@@ -64,7 +58,6 @@ namespace QzoneAutoLike
             }
             return temp;
         }
-
         public static string Fix(string url)
         {
             string temp = url;
@@ -103,7 +96,8 @@ namespace QzoneAutoLike
             string strHtml = "", url1;
             url1 = _Url.Fix(url);
             WebClient myWebClient = new WebClient();
-            Stream myStream = myWebClient.OpenRead(url1);
+            Stream myStream = null;
+            myStream = myWebClient.OpenRead(url1);
             StreamReader sr = new StreamReader(myStream, System.Text.Encoding.GetEncoding("utf-8"));
             strHtml = sr.ReadToEnd();
             myStream.Close();

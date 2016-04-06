@@ -1,25 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 namespace QzoneAutoLike
 {
     public partial class ControlForm : Form
     {
         public static bool haveNewVersion = false;
-        private static int newVersionHeight;
+        public static int newVersionHeight;
         Form _we;
         public ControlForm()
         {
             InitializeComponent();
         }
-        public string remoteVersion = "1.0.0.0000";
+        public static string remoteVersion = "1.0.0.0000";
         private void Form1_Load(object sender, EventArgs e)
         {
+            Rectangle rect = new Rectangle();
+            rect = Screen.GetWorkingArea(this);
+            this.Left = rect.Left;
+            this.Top = rect.Top;
+            //保证在工作区左上角，以免当任务栏不在底部时无法操作控制按钮
+
             newVersionHeight = this.Height;
             label6.Text = "当前版本:" + Program.localVersion + "\n\n→点我检查更新←";
             newHeight(553);
@@ -144,10 +146,25 @@ namespace QzoneAutoLike
         {
             System.Diagnostics.Process.Start("http://www.khmapp.xyz/");
         }
-
-        private void checkUpdate()
+        public Thread t1;
+        public void checkUpdate()
         {
-            remoteVersion = GetHtmlCode.GetWebClient(Program.githubUrl + "raw/master/SourceCode/QzoneAutoLike/version.inf");
+            ControlForm.CheckForIllegalCrossThreadCalls = false;
+            System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+            label6.Text = "当前版本:" + Program.localVersion + "\n\n→检查更新中←";
+            label6.ForeColor = Color.Blue;
+            try
+            {
+                remoteVersion = GetHtmlCode.GetWebClient(Program.githubUrl + "raw/master/SourceCode/QzoneAutoLike/version.inf");
+            }
+            catch (Exception e)
+            {
+                label6.Text = "当前版本:" + Program.localVersion + "\n\n→检查失败←";
+                label6.ForeColor = Color.Black;
+                label6.Cursor = Cursors.Hand;
+                MessageBox.Show("检查失败！\n" + e.Message.ToString(), "检查更新错误");
+                t1.Abort();
+            }
             int lV, rV;
             lV = int.Parse(deleteAllDotString(Program.localVersion));
             rV = int.Parse(deleteAllDotString(remoteVersion));
@@ -156,21 +173,22 @@ namespace QzoneAutoLike
             {
                 newHeight(newVersionHeight);
                 aboutText = "发现新版本";
+                label6.ForeColor = Color.Red;
             }
             else
             {
                 newHeight(553);
                 aboutText = "服务器没有更高的版本";
+                label6.ForeColor = Color.Green;
             }
             label6.Text = "当前版本:" + Program.localVersion + "\n远程版本:" + remoteVersion + "\n" + aboutText;
+            t1.Abort();
         }
-
         private void newHeight(int height)
         {
             if (this.Height != height)
                 this.Height = height;
         }
-
         private string deleteAllDotString(string source)
         {
             string ret = source;
@@ -180,7 +198,6 @@ namespace QzoneAutoLike
             }
             return ret;
         }
-
         /// <summary>        
         /// c#,.net 下载文件        
         /// </summary>        
@@ -229,7 +246,6 @@ namespace QzoneAutoLike
                 throw;
             }
         }
-
         private void button8_Click(object sender, EventArgs e)
         {
             DialogResult dR_mb = MessageBox.Show(this, "您是否要使用程序自动升级？\n[是(Y)] 使用自动升级 [否(N)]进入Github手动下载 [取消]取消操作"
@@ -249,14 +265,14 @@ namespace QzoneAutoLike
             }
 
         }
-        private bool checkedUpdate = false;
-
         private void label6_Click(object sender, EventArgs e)
         {
-            if (!checkedUpdate)
+            if (label6.Cursor == Cursors.Hand)
             {
-                checkUpdate();
-                checkedUpdate = true;
+
+                t1 = new Thread(new ThreadStart(checkUpdate));
+                t1.Start();
+                label6.Cursor = Cursors.No;
             }
         }
     }

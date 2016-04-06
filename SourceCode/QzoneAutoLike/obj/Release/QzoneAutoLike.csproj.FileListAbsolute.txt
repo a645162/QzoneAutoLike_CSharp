@@ -21,3 +21,14 @@ H:\Development\Project\AutoLike\QzoneAutoLike_C#_Github\SourceCode\QzoneAutoLike
 H:\Development\Project\AutoLike\QzoneAutoLike_C#_Github\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.WebBrowserForm.resources
 H:\Development\Project\AutoLike\QzoneAutoLike_C#_Github\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.Properties.Resources.resources
 H:\Development\Project\AutoLike\QzoneAutoLike_C#_Github\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.csproj.GenerateResource.Cache
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\bin\Release\QzoneAutoLike.exe.config
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.exe
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.pdb
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\bin\Release\QzoneAutoLike.exe
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\bin\Release\QzoneAutoLike.pdb
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.csprojResolveAssemblyReference.cache
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.ControlForm.resources
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.UpdateForm.resources
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.WebBrowserForm.resources
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.Properties.Resources.resources
+C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\obj\Release\QzoneAutoLike.csproj.GenerateResource.Cache
