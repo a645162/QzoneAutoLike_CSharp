@@ -162,7 +162,7 @@ namespace QzoneAutoLike
                 label6.Text = "当前版本:" + Program.localVersion + "\n\n→检查失败←";
                 label6.ForeColor = Color.Black;
                 label6.Cursor = Cursors.Hand;
-                MessageBox.Show("检查失败！\n" + e.Message.ToString(), "检查更新错误");
+                MessageBox.Show(this,"检查失败！\n" + e.Message.ToString(), "检查更新错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 t1.Abort();
             }
             int lV, rV;
@@ -198,54 +198,7 @@ namespace QzoneAutoLike
             }
             return ret;
         }
-        /// <summary>        
-        /// c#,.net 下载文件        
-        /// </summary>        
-        /// <param name="URL">下载文件地址</param>       
-        /// 
-        /// <param name="Filename">下载后的存放地址</param>        
-        /// <param name="Prog">用于显示的进度条</param>        
-        /// 
-        public void DownloadFile(string URL, string filename, System.Windows.Forms.ProgressBar prog, System.Windows.Forms.Label label1)
-        {
-            float percent = 0;
-            try
-            {
-                System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
-                System.Net.HttpWebResponse myrp = (System.Net.HttpWebResponse)Myrq.GetResponse();
-                long totalBytes = myrp.ContentLength;
-                if (prog != null)
-                {
-                    prog.Maximum = (int)totalBytes;
-                }
-                System.IO.Stream st = myrp.GetResponseStream();
-                System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
-                long totalDownloadedByte = 0;
-                byte[] by = new byte[1024];
-                int osize = st.Read(by, 0, (int)by.Length);
-                while (osize > 0)
-                {
-                    totalDownloadedByte = osize + totalDownloadedByte;
-                    System.Windows.Forms.Application.DoEvents();
-                    so.Write(by, 0, osize);
-                    if (prog != null)
-                    {
-                        prog.Value = (int)totalDownloadedByte;
-                    }
-                    osize = st.Read(by, 0, (int)by.Length);
-
-                    percent = (float)totalDownloadedByte / (float)totalBytes * 100;
-                    label1.Text = "当前补丁下载进度" + percent.ToString() + "%";
-                    System.Windows.Forms.Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
-                }
-                so.Close();
-                st.Close();
-            }
-            catch (System.Exception)
-            {
-                throw;
-            }
-        }
+        
         private void button8_Click(object sender, EventArgs e)
         {
             DialogResult dR_mb = MessageBox.Show(this, "您是否要使用程序自动升级？\n[是(Y)] 使用自动升级 [否(N)]进入Github手动下载 [取消]取消操作"
