@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace QzoneAutoLike
@@ -10,16 +12,50 @@ namespace QzoneAutoLike
             InitializeComponent();
         }
 
-        private string fileUrl=null;
+        private string fileUrl = null;
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (button1.Text == "开始更新")
+            {
+                button1.Enabled = false;
+                button1.Text = "更新中";
+                label4.Text = "即将开始，并创建更新线程";
+                progressBar1.Value = 10;
+                t = new Thread(new ThreadStart(updateProgress));
+                t.Start();
+            }
+            else if (button1.Text == "完成")
+            {
+
+            }
+        }
+
+        private Thread t;
+
+        private void updateProgress()
+        {
+            Thread.Sleep(1000);
+            Control.CheckForIllegalCrossThreadCalls = false;
+            radioButton1.Enabled = radioButton2.Enabled = false;
+            progressBar1.Value = 20;
             string dotNet = "35";
             if (radioButton1.Checked) dotNet = "45";
-            fileUrl = Program.githubUrl+ "blob/master/Binary/QzoneAutoLike" + dotNet + ".exe?raw=true";
-            DownloadFile(fileUrl, @"C:\\Users\a6451\Desktop\qzone.exe", progressBar2, label3);
-
+            fileUrl = Program.githubUrl + "blob/master/Binary/QzoneAutoLike" + dotNet + ".exe?raw=true";
+            label4.Text = "准备任务完成，即将开始下载";
+            Thread.Sleep(2000);
             
+            DownloadFile(fileUrl, Program.tempPath, progressBar2, label4);
+            if (progressBar2.Value == 100)
+            {
+                progressBar1.Value = 60;
+            }
+            Thread.Sleep(1000);
+
+
+            button1.Text = "完成";
+            button1.Enabled = true;
+            t.Abort();
         }
 
 
@@ -76,7 +112,7 @@ namespace QzoneAutoLike
         private void UpdateForm_Load(object sender, EventArgs e)
         {
             radioButton1.Checked = Program.dotNetVersion != "35";
-            radioButton2.Checked = !radioButton1.Checked ;
+            radioButton2.Checked = !radioButton1.Checked;
         }
     }
 }

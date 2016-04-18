@@ -45,7 +45,7 @@ namespace QzoneAutoLike
             radioButton1.Checked = true;
             radioButton2.Checked = false;
             radioButton3.Checked = false;
-            WebBrowserForm.Wb.Navigate("http://qzone.qq.com");
+            WebBrowserForm.Wb.Navigate("http://i.qq.com");
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -162,7 +162,7 @@ namespace QzoneAutoLike
                 label6.Text = "当前版本:" + Program.localVersion + "\n\n→检查失败←";
                 label6.ForeColor = Color.Black;
                 label6.Cursor = Cursors.Hand;
-                MessageBox.Show(this,"检查失败！\n" + e.Message.ToString(), "检查更新错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(this, "检查失败！\n" + e.Message.ToString(), "检查更新错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 t1.Abort();
             }
             int lV, rV;
@@ -198,7 +198,7 @@ namespace QzoneAutoLike
             }
             return ret;
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
             DialogResult dR_mb = MessageBox.Show(this, "您是否要使用程序自动升级？\n[是(Y)] 使用自动升级 [否(N)]进入Github手动下载 [取消]取消操作"
@@ -226,6 +226,22 @@ namespace QzoneAutoLike
                 t1 = new Thread(new ThreadStart(checkUpdate));
                 t1.Start();
                 label6.Cursor = Cursors.No;
+            }
+        }
+
+        private void timer_AutoHide_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (WebBrowserForm.Wb.Url.ToString().IndexOf("user.qzone.qq.com/") != -1)
+                {
+                    checkBox4.Checked = false;
+                    timer_AutoHide.Enabled = false;
+                }
+            }
+            catch
+            {
+                ;
             }
         }
     }

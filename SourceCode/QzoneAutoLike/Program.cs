@@ -11,16 +11,52 @@ namespace QzoneAutoLike
         public static string localVersion;
         public const string dotNetVersion = "45";
         public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
+        public static string tempPath = "";
+        public static string Path = System.Windows.Forms.Application.ExecutablePath;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             localVersion = Application.ProductVersion;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            tempPath = new DirectoryInfo(System.Environment.GetEnvironmentVariable("TEMP")).FullName + "\\qzoneAutoLike_update.exe";
+            
+            MessageBox.Show(Path);
+            MessageBox.Show(getFilenameFromPath(Path));
+            if (args.Length != 0)
+            {
+                if (args[0] == "/u")
+                {
+                    string epath = args[1];
+                    if (!File.Exists(tempPath)|| !File.Exists(epath))
+                    {
+                        MessageBox.Show("程序内部错误！\n找不到指定文件！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
+
+
+                }
+                else if (args[0] == "/d")
+                {
+                    File.Delete(tempPath);
+                }
+                else
+                {
+                    MessageBox.Show("运行参数错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
+            }
             Application.Run(new ControlForm());
+        }
+        public static string getFilenameFromPath(string path)
+        {
+            string filename = path;
+            //C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\bin\Debug\QzoneAutoLike.exe
+            filename = filename.Substring(filename.LastIndexOf('\\')+1);
+            return filename;
         }
     }
     public static class _Url
@@ -90,7 +126,6 @@ namespace QzoneAutoLike
     }
     public static class GetHtmlCode
     {
-        //WebClient
         public static string GetWebClient(string url)
         {
             string strHtml = "", url1;
@@ -103,8 +138,6 @@ namespace QzoneAutoLike
             myStream.Close();
             return strHtml;
         }
-
-        //WebRequest
         public static string GetWebRequest(string url)
         {
             Uri uri;
@@ -119,8 +152,6 @@ namespace QzoneAutoLike
             result.Close();
             return strHTML;
         }
-
-        //HttpWebRequest
         public static string GetHttpWebRequest(string url)
         {
             Uri uri;
@@ -140,7 +171,6 @@ namespace QzoneAutoLike
             result.Close();
             return strHTML;
         }
-
         //HttpWebRequest 方式最复杂，但确提供了更多的选择性。
         //有的网站检测客户端的UserAgent！如163.com，你如果使用WebClient WebRequest方式获取时，将获取到的是错误提示页面内容。
         //而通过HttpWebRequest就没问题。
