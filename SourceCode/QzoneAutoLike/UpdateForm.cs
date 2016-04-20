@@ -39,8 +39,6 @@ namespace QzoneAutoLike
             if (radioButton1.Checked) dotNet = "45";
             fileUrl = Program.githubUrl + "blob/master/Binary/QzoneAutoLike" + dotNet + ".exe?raw=true";
             label4.Text = "准备任务完成，即将开始下载";
-            Thread.Sleep(2000);
-            
             DownloadFile(fileUrl, Program.tempPath, progressBar2, label4);
             if (progressBar2.Value == 100)
             {
@@ -55,6 +53,7 @@ namespace QzoneAutoLike
             Thread.Sleep(2000);
             System.Diagnostics.Process process1 = new System.Diagnostics.Process();
             process1.StartInfo.FileName = Program.tempPath;
+            process1.StartInfo.Arguments = "/u \""+Program.Path+"\"";
             process1.Start();
             Application.Exit();
             t.Abort();
@@ -99,7 +98,7 @@ namespace QzoneAutoLike
                     osize = st.Read(by, 0, (int)by.Length);
 
                     percent = (float)totalDownloadedByte / (float)totalBytes * 100;
-                    label1.Text = "当前补丁下载进度" + percent.ToString() + "%";
+                    label1.Text = "当前更新下载进度:" + percent.ToString() + "%";
                     System.Windows.Forms.Application.DoEvents(); //必须加注这句代码，否则label1将因为循环执行太快而来不及显示信息
                 }
                 so.Close();

@@ -26,6 +26,7 @@ namespace QzoneAutoLike
             tempPath = new DirectoryInfo(System.Environment.GetEnvironmentVariable("TEMP")).FullName + "\\qzoneAutoLike_update.exe";
             if (args.Length != 0)
             {
+                MessageBox.Show(args[0] + "\n" + args[1]);
                 if (args[0] == "/u")
                 {
                     string epath = args[1];
