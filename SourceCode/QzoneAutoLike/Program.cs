@@ -10,7 +10,7 @@ namespace QzoneAutoLike
     static class Program
     {
         public static string localVersion;
-        public const string dotNetVersion = "35";
+        public const string dotNetVersion = "45";
         public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
         public static string tempPath = "";
         public static string Path = System.Windows.Forms.Application.ExecutablePath;
@@ -47,7 +47,6 @@ namespace QzoneAutoLike
                     process1.StartInfo.FileName = epath;
                     process1.StartInfo.Arguments = "/d";
                     process1.Start();
-                    Application.Exit();
                 }
                 else if (args[0] == "/d")
                 {
