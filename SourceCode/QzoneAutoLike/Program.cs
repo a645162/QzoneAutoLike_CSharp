@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Security.Policy;
@@ -9,7 +10,7 @@ namespace QzoneAutoLike
     static class Program
     {
         public static string localVersion;
-        public const string dotNetVersion = "45";
+        public const string dotNetVersion = "35";
         public const string githubUrl = @"https://github.com/a645162/QzoneAutoLike_CSharp/";
         public static string tempPath = "";
         public static string Path = System.Windows.Forms.Application.ExecutablePath;
@@ -23,25 +24,42 @@ namespace QzoneAutoLike
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             tempPath = new DirectoryInfo(System.Environment.GetEnvironmentVariable("TEMP")).FullName + "\\qzoneAutoLike_update.exe";
-            
-            MessageBox.Show(Path);
-            MessageBox.Show(getFilenameFromPath(Path));
             if (args.Length != 0)
             {
                 if (args[0] == "/u")
                 {
                     string epath = args[1];
-                    if (!File.Exists(tempPath)|| !File.Exists(epath))
+                    if (!File.Exists(tempPath) || !File.Exists(epath))
                     {
                         MessageBox.Show("程序内部错误！\n找不到指定文件！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    
-
-
+                    System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcesses();
+                    foreach (System.Diagnostics.Process process in processList)
+                    {
+                        if (process.ProcessName.ToUpper() == getFilenameFromPath(epath).ToUpper())
+                        {
+                            process.Kill();
+                        }
+                    }
+                    File.Delete(epath);
+                    File.Copy(tempPath, epath);
+                    System.Diagnostics.Process process1 = new System.Diagnostics.Process();
+                    process1.StartInfo.FileName = epath;
+                    process1.StartInfo.Arguments = "/d";
+                    process1.Start();
                 }
                 else if (args[0] == "/d")
                 {
+                    System.Diagnostics.Process[] processList = System.Diagnostics.Process.GetProcesses();
+                    foreach (System.Diagnostics.Process process in processList)
+                    {
+                        if (process.ProcessName.ToUpper() == getFilenameFromPath(tempPath).ToUpper())
+                        {
+                            process.Kill();
+                        }
+                    }
                     File.Delete(tempPath);
+                    MessageBox.Show("更新成功！\n即将显示主窗口！", "空间自动点赞器");
                 }
                 else
                 {
@@ -54,8 +72,7 @@ namespace QzoneAutoLike
         public static string getFilenameFromPath(string path)
         {
             string filename = path;
-            //C:\Users\a6451\Source\Repos\QzoneAutoLike_CSharp2\SourceCode\QzoneAutoLike\bin\Debug\QzoneAutoLike.exe
-            filename = filename.Substring(filename.LastIndexOf('\\')+1);
+            filename = filename.Substring(filename.LastIndexOf('\\') + 1);
             return filename;
         }
     }

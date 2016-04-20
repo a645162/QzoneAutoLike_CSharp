@@ -25,10 +25,6 @@ namespace QzoneAutoLike
                 t = new Thread(new ThreadStart(updateProgress));
                 t.Start();
             }
-            else if (button1.Text == "完成")
-            {
-
-            }
         }
 
         private Thread t;
@@ -51,10 +47,16 @@ namespace QzoneAutoLike
                 progressBar1.Value = 60;
             }
             Thread.Sleep(1000);
-
-
-            button1.Text = "完成";
-            button1.Enabled = true;
+            label4.Text = "下载完成，即将退出本程序进行替换操作";
+            progressBar1.Value = 70;
+            Thread.Sleep(1000);
+            label4.Text = "2秒后执行操作";
+            progressBar1.Value = 90;
+            Thread.Sleep(2000);
+            System.Diagnostics.Process process1 = new System.Diagnostics.Process();
+            process1.StartInfo.FileName = Program.tempPath;
+            process1.Start();
+            Application.Exit();
             t.Abort();
         }
 
